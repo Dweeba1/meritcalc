@@ -23,9 +23,10 @@ function parseCSV(data) {
                 title: cells[0],
                 salarySchedule: cells[1],
                 minRate: parseFloat(cells[2]),
-                maxRate: parseFloat(cells[3]),
-                exceptionalMin: parseFloat(cells[4]),
-                exceptionalMax: parseFloat(cells[5])
+                midRate: parseFloat(cells[3]),
+                maxRate: parseFloat(cells[4]),
+                exceptionalMin: parseFloat(cells[5]),
+                exceptionalMax: parseFloat(cells[6])
             });
         }
     }
@@ -51,11 +52,38 @@ function generateTable() {
         <tr>
             <td>${selectedTitle.salarySchedule}</td>
             <td>${selectedTitle.minRate}</td>
+            <td>${selectedTitle.midRate}</td>
             <td>${selectedTitle.maxRate}</td>
             <td>${selectedTitle.exceptionalMin}</td>
             <td>${selectedTitle.exceptionalMax}</td>
         </tr>
     `;
+}
+
+function displayMeritMessage() {
+    const meritRating = document.getElementById('merit-rating').value;
+    const messageDiv = document.getElementById('merit-message');
+
+    let message = "";
+    switch (meritRating) {
+        case "0":
+            message = "Evaluations with an overall rating of “Needs Improvement” are not eligible for performance-based merit increase.";
+            break;
+        case "3":
+            message = "Evaluations with an overall rating of “Meets Performance Objectives” may earn a 3% increase, not to exceed the advertised maximum of the salary range for the classification.";
+            break;
+        case "6":
+            message = "Evaluations with an overall rating of “Exceeds Performance Objectives” may earn a 6% increase, not to exceed the advertised maximum of the salary range for the classification.";
+            break;
+        case "9":
+            message = "Evaluations with an overall rating of “Demonstrates Exceptional Performance” may earn a 9% increase, not to exceed the Exceptional Performance maximum of the salary range for the classification.";
+            break;
+        default:
+            message = "";
+            break;
+    }
+
+    messageDiv.innerHTML = message;
 }
 
 function calculateMeritIncrease() {
@@ -85,6 +113,7 @@ function clearForm() {
     document.getElementById('current-rate').value = '';
     document.getElementById('merit-rating').selectedIndex = 0;
     document.getElementById('salary-table').getElementsByTagName('tbody')[0].innerHTML = '';
+    document.getElementById('merit-message').innerHTML = '';
     document.getElementById('cola-increase').innerText = '';
     document.getElementById('merit-increase').innerText = '';
     document.getElementById('estimated-rate').innerText = '';
