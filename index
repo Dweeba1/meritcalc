@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manager Merit Calculator</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="calculator">
+        <div class="header">
+            <img src="logo.png" alt="Logo" class="logo">
+            <h1>Manager Merit Calculator</h1>
+        </div>
+        <div class="form-group">
+            <label for="title">Select Title:</label>
+            <select id="title" onchange="generateTable()">
+                <option value="">Select One</option>
+                <!-- Options will be populated dynamically -->
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="current-rate">Current Hourly Rate:</label>
+            <input type="number" id="current-rate" placeholder="$0.00">
+        </div>
+        <div class="form-group">
+            <label for="merit-rating">Merit Rating:</label>
+            <select id="merit-rating">
+                <option value="">Select One</option>
+                <option value="0">Needs Improvement</option>
+                <option value="3">Meets Performance Objectives</option>
+                <option value="6">Exceeds Performance Objectives</option>
+                <option value="9">Demonstrates Exceptional Performance</option>
+            </select>
+        </div>
+        <table id="salary-table">
+            <thead>
+                <tr>
+                    <th colspan="3"></th>
+                    <th colspan="2" class="exceptional-performance">Reserved for Exceptional Performance</th>
+                </tr>
+                <tr>
+                    <th>Salary Schedule</th>
+                    <th>Min</th>
+                    <th>Advertised Max</th>
+                    <th>Bottom</th>
+                    <th>Top</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Table rows will be populated dynamically -->
+            </tbody>
+        </table>
+        <div class="form-group buttons">
+            <button onclick="calculateMeritIncrease()">Calculate</button>
+            <button onclick="clearForm()">Clear Form</button>
+        </div>
+        <div id="results">
+            <p>Hourly Rate after Negotiated Increase is Applied: <span id="cola-increase"></span></p>
+            <p>Merit Percentage Increase: <span id="merit-increase"></span></p>
+            <p>Estimated Hourly Rate (effective 6/28/24): <span id="estimated-rate"></span></p>
+        </div>
+        <div class="footer">
+            <img src="logo.png" alt="Logo" class="logo-footer">
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
