@@ -1,0 +1,89 @@
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f4f4f4;
+    margin: 0;
+}
+
+.calculator {
+    border: 2px solid orange;
+    padding: 20px;
+    background-color: white;
+    border-radius: 10px;
+    width: 450px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box; /* Ensure padding is included in the element's width */
+}
+
+.header, .footer {
+    background-color: orange;
+    padding: 10px;
+    text-align: center;
+    margin-bottom: 20px;
+    border-radius: 10px 10px 0 0;
+}
+
+.header img, .footer img {
+    width: 50px;
+    height: 50px;
+}
+
+.footer {
+    border-radius: 0 0 10px 10px;
+    margin-top: 20px;
+}
+
+h1 {
+    font-size: 1.5em;
+    margin: 0;
+    color: white;
+}
+
+.form-group {
+    margin: 15px 0;
+}
+
+.form-group.buttons {
+    display: flex;
+    justify-content: space-between;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+input, select {
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+}
+
+table {
+    width: 100%;
+    margin-top: 10px;
+    border-collapse: collapse;
+}
+
+th, td {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: center;
+    font-size: 10pt;
+    font-weight: normal;
+    white-space: nowrap;
+}
+
+th[colspan="2"].exceptional-performance {
+    background-color: #f0f0f0;
+    white-space: normal;
+}
+
+#results {
+    margin-top: 20px;
+}
