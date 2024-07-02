@@ -25,7 +25,7 @@
         </div>
         <div class="form-group">
             <label for="merit-rating">Merit Rating:</label>
-            <select id="merit-rating">
+            <select id="merit-rating" onchange="displayMeritMessage()">
                 <option value="">Select One</option>
                 <option value="0">Needs Improvement</option>
                 <option value="3">Meets Performance Objectives</option>
@@ -33,16 +33,18 @@
                 <option value="9">Demonstrates Exceptional Performance</option>
             </select>
         </div>
+        <div id="merit-message" class="merit-message"></div>
         <table id="salary-table">
             <thead>
                 <tr>
-                    <th colspan="3"></th>
-                    <th colspan="2" class="exceptional-performance">Reserved for Exceptional Performance</th>
+                    <th colspan="4"></th>
+                    <th colspan="2" class="exceptional-performance">Reserved for Exceptional<br>Performance</th>
                 </tr>
                 <tr>
-                    <th>Salary Schedule</th>
+                    <th>Salary<br>Schedule</th>
                     <th>Min</th>
-                    <th>Advertised Max</th>
+                    <th>Mid</th>
+                    <th>Advertised<br>Max</th>
                     <th>Bottom</th>
                     <th>Top</th>
                 </tr>
@@ -61,7 +63,10 @@
             <p>Estimated Hourly Rate (effective 6/28/24): <span id="estimated-rate"></span></p>
         </div>
         <div class="footer">
-            <img src="logo.png" alt="Logo" class="logo-footer">
+            <div class="disclaimer">
+                <b>Disclaimer:</b> These calculations are not official and should be used as estimates only. You will receive a memo from Human Resources Services with your approved new hourly rate following completion of your evaluation.
+            </div>
+            <img src="logo2.png" alt="Logo" class="logo-footer">
         </div>
     </div>
     <script src="script.js"></script>
