@@ -15,18 +15,18 @@
             <h1>Manager Merit Calculator</h1>
         </div>
         <div class="form-group">
-            <label for="title">Select Title:</label>
+            <label for="title">Select Title</label>
             <select id="title" onchange="generateTable()">
                 <option value="">Select One</option>
                 <!-- Options will be populated dynamically -->
             </select>
         </div>
         <div class="form-group">
-            <label for="current-rate">Current Hourly Rate:</label>
+            <label for="current-rate">Current Hourly Rate</label>
             <input type="number" id="current-rate" placeholder="$0.00">
         </div>
         <div class="form-group">
-            <label for="merit-rating">Merit Rating:</label>
+            <label for="merit-rating">Merit Rating</label>
             <select id="merit-rating" onchange="displayMeritMessage()">
                 <option value="">Select One</option>
                 <option value="0">Needs Improvement</option>
@@ -59,11 +59,13 @@
             <button onclick="calculateMeritIncrease()">Calculate</button>
             <button onclick="clearForm()">Clear Form</button>
         </div>
-        <div id="results">
-            <b>Updated Salary Information:</b>
-            <p>Hourly Rate after Negotiated Increase is Applied: <span id="cola-increase"></span></p>
-            <p>Merit Percentage Increase: <span id="merit-increase"></span></p>
-            <p>Estimated Hourly Rate (effective 6/28/24): <span id="estimated-rate"></span></p>
+        <div id="results" class="results">
+            <div class="results-content">
+                <b>Updated Salary Information</b>
+                <p>Hourly Rate after Negotiated Increase is Applied<br><span id="cola-increase"></span></p>
+                <p>Merit Percentage Increase<br><span id="merit-increase"></span></p>
+                <p>Estimated Hourly Rate (effective 6/28/24)<br><span id="estimated-rate"></span></p>
+            </div>
         </div>
         <div class="footer">
             <div class="disclaimer">
