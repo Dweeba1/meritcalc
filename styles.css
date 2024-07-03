@@ -13,7 +13,7 @@ body {
     padding: 20px;
     background-color: white;
     border-radius: 10px;
-    max-width: 100%; /* Ensure it fits within viewport */
+    max-width: 30%; /* Ensure it fits within viewport */
     max-height: 100%; /* Ensure it fits within viewport */
     overflow: hidden; /* Hide overflow content */
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
@@ -47,8 +47,7 @@ h1 {
 
 .form-group.buttons {
     display: flex;
-    justify-content: flex-end; /* Align buttons to the right */
-    margin-top: -30px; /* Adjust to align with "Select Title" */
+    justify-content: center; /* Align buttons to the right */
 }
 
 .form-group.buttons button {
