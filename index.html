@@ -9,7 +9,9 @@
 <body>
     <div class="calculator">
         <div class="header">
-            <img src="5.png" alt="Logo" class="logo">
+            <div class="logo-wrapper">
+                <img src="logo.png" alt="Logo" class="logo">
+            </div>
             <h1>Manager Merit Calculator</h1>
         </div>
         <div class="form-group">
@@ -58,6 +60,7 @@
             <button onclick="clearForm()">Clear Form</button>
         </div>
         <div id="results">
+            <b>Updated Salary Information:</b>
             <p>Hourly Rate after Negotiated Increase is Applied: <span id="cola-increase"></span></p>
             <p>Merit Percentage Increase: <span id="merit-increase"></span></p>
             <p>Estimated Hourly Rate (effective 6/28/24): <span id="estimated-rate"></span></p>
@@ -66,7 +69,9 @@
             <div class="disclaimer">
                 <b>Disclaimer:</b> These calculations are not official and should be used as estimates only. You will receive a memo from Human Resources Services with your approved new hourly rate following completion of your evaluation.
             </div>
-            <img src="logo2.png" alt="Logo" class="logo-footer">
+            <div class="logo-footer-wrapper">
+                <img src="logo2.png" alt="Logo" class="logo-footer">
+            </div>
         </div>
     </div>
     <script src="script.js"></script>
