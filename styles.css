@@ -13,7 +13,8 @@ body {
     padding: 20px;
     background-color: white;
     border-radius: 10px;
-    width: 700px; /* Adjust width as needed */
+    max-width: 1000px; /* Adjust width as needed */
+    max-height: 90vh
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
     display: flex;
     flex-direction: column;
@@ -45,8 +46,7 @@ h1 {
 
 .form-group.buttons {
     display: flex;
-    justify-content: flex-end; /* Align buttons to the right */
-    margin-top: -30px; /* Adjust to align with "Select Title" */
+    justify-content: center; 
 }
 
 .form-group.buttons button {
