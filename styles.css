@@ -20,44 +20,23 @@ body {
     box-sizing: border-box; /* Ensure padding is included in the element's width */
 }
 
-.header, .footer {
-    background-color: white;
+.header {
     padding: 10px;
     text-align: center;
     margin-bottom: 20px;
     border-radius: 10px 10px 0 0;
-    display: flex;
-    align-items: center;
-}
-
-.logo-wrapper {
-    padding: 10px;
-    margin-bottom: 10px;
 }
 
 .header img {
-    width: 200px; /* Adjusted size */
-    height: 200px; /* Adjusted size */
+    width: auto;
+    height: 100px; /* Adjust size as needed */
     background-color: orange;
-}
-
-.footer img {
-    width: 50px;
-    height: 50px;
-    margin-top: 10px;
-}
-
-.footer {
-    border-radius: 0 0 10px 10px;
-    margin-top: 20px;
 }
 
 h1 {
     font-size: 1.5em;
-    margin: 0;
+    margin: 10px 0;
     color: black;
-    flex-grow: 1;
-    text-align: left;
 }
 
 .form-group {
@@ -66,18 +45,26 @@ h1 {
 
 .form-group.buttons {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
+}
+
+.form-group.buttons button {
+    font-size: 16px;
+    padding: 10px 20px;
+    margin: 5px;
 }
 
 label {
     display: block;
     margin-bottom: 5px;
+    font-size: 12pt;
 }
 
 input, select {
     width: 100%;
     padding: 8px;
     box-sizing: border-box;
+    font-size: 12pt;
 }
 
 table {
@@ -123,8 +110,14 @@ th[colspan="2"].exceptional-performance {
     color: white;
     padding: 20px;
     border-radius: 10px;
-    text-align: center;
+    text-align: left;
     margin-top: 20px;
+}
+
+.results-content {
+    padding-left: 10px;
+    padding-right: 10px;
+    font-size: 12pt;
 }
 
 .results-content p {
