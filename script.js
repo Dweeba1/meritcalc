@@ -61,4 +61,51 @@ function generateTable() {
 }
 
 function displayMeritMessage() {
-    const meritRating = document
+    const meritRating = document.getElementById('merit-rating').value;
+    const messageDiv = document.getElementById('merit-message');
+
+    let message = "";
+    switch (meritRating) {
+        case "0":
+            message = "Evaluations with an overall rating of “Needs Improvement” are not eligible for performance-based merit increase.";
+            break;
+        case "3":
+            message = "Evaluations with an overall rating of “Meets Performance Objectives” will be eligible for a 3% merit increase.";
+            break;
+        case "6":
+            message = "Evaluations with an overall rating of “Exceeds Performance Objectives” will be eligible for a 6% merit increase.";
+            break;
+        case "9":
+            message = "Evaluations with an overall rating of “Demonstrates Exceptional Performance” will be eligible for a 9% merit increase.";
+            break;
+        default:
+            message = "";
+            break;
+    }
+
+    messageDiv.innerHTML = message;
+}
+
+function calculateMeritIncrease() {
+    const currentRate = parseFloat(document.getElementById('current-rate').value);
+    const meritRating = parseInt(document.getElementById('merit-rating').value);
+    const colaIncrease = currentRate * 0.02; // Assuming a 2% COLA increase
+    const meritPercentage = meritRating / 100;
+    const meritIncrease = currentRate * meritPercentage;
+    const estimatedRate = currentRate + colaIncrease + meritIncrease;
+
+    document.getElementById('cola-increase').innerText = `$${(currentRate + colaIncrease).toFixed(2)}`;
+    document.getElementById('merit-increase').innerText = `${meritRating}%`;
+    document.getElementById('estimated-rate').innerText = `$${estimatedRate.toFixed(2)}`;
+}
+
+function clearForm() {
+    document.getElementById('title').value = "";
+    document.getElementById('current-rate').value = "";
+    document.getElementById('merit-rating').value = "";
+    document.getElementById('merit-message').innerHTML = "";
+    document.getElementById('salary-table').getElementsByTagName('tbody')[0].innerHTML = "";
+    document.getElementById('cola-increase').innerText = "";
+    document.getElementById('merit-increase').innerText = "";
+    document.getElementById('estimated-rate').innerText = "";
+}
