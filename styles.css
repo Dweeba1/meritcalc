@@ -13,8 +13,7 @@ body {
     padding: 20px;
     background-color: white;
     border-radius: 10px;
-    width: 700px; /* Adjusted width */
-     max-height: 75vh;
+    width: 700px; /* Adjust width as needed */
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
     display: flex;
     flex-direction: column;
@@ -46,7 +45,8 @@ h1 {
 
 .form-group.buttons {
     display: flex;
-    justify-content: center;
+    justify-content: flex-end; /* Align buttons to the right */
+    margin-top: -30px; /* Adjust to align with "Select Title" */
 }
 
 .form-group.buttons button {
@@ -113,7 +113,7 @@ th.grey-header {
 #results {
     background-color: orange;
     color: white;
-    padding: 20px 30px; /* Added left and right padding */
+    padding: 20px;
     border-radius: 10px;
     text-align: left;
     margin-top: 20px;
@@ -133,7 +133,7 @@ th.grey-header {
     font-weight: bold;
 }
 
-.results-content p:nth-child(4) span {
+.results-content p:nth-child(3) span {
     font-size: 18pt;
 }
 
@@ -158,5 +158,5 @@ th.grey-header {
 }
 
 .logo-footer {
-    width: 25%; /* 1/4 of the original size */
+    width: 100px; /* Adjust size as needed */
 }
