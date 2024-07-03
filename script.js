@@ -51,32 +51,32 @@ function generateTable() {
     tbody.innerHTML = `
         <tr>
             <td>${selectedTitle.salarySchedule}</td>
-            <td>${selectedTitle.minRate}</td>
-            <td>${selectedTitle.midRate}</td>
-            <td>${selectedTitle.maxRate}</td>
-            <td>${selectedTitle.exceptionalMin}</td>
-            <td>${selectedTitle.exceptionalMax}</td>
+            <td>${selectedTitle.minRate.toFixed(2)}</td>
+            <td>${selectedTitle.midRate.toFixed(2)}</td>
+            <td>${selectedTitle.maxRate.toFixed(2)}</td>
+            <td>${selectedTitle.exceptionalMin.toFixed(2)}</td>
+            <td>${selectedTitle.exceptionalMax.toFixed(2)}</td>
         </tr>
     `;
 }
 
 function displayMeritMessage() {
-    const meritRating = document.getElementById('merit-rating').value;
+    const meritRating = parseInt(document.getElementById('merit-rating').value);
     const messageDiv = document.getElementById('merit-message');
 
     let message = "";
     switch (meritRating) {
-        case "0":
+        case 0:
             message = "Evaluations with an overall rating of “Needs Improvement” are not eligible for performance-based merit increase.";
             break;
-        case "3":
-            message = "Evaluations with an overall rating of “Meets Performance Objectives” will be eligible for a 3% merit increase.";
+        case 3:
+            message = "Evaluations with an overall rating of “Meets Performance Objectives” may earn a 3% increase, not to exceed the advertised maximum of the salary range for the classification.";
             break;
-        case "6":
-            message = "Evaluations with an overall rating of “Exceeds Performance Objectives” will be eligible for a 6% merit increase.";
+        case 6:
+            message = "Evaluations with an overall rating of “Exceeds Performance Objectives” may earn a 6% increase, not to exceed the advertised maximum of the salary range for the classification.";
             break;
-        case "9":
-            message = "Evaluations with an overall rating of “Demonstrates Exceptional Performance” will be eligible for a 9% merit increase.";
+        case 9:
+            message = "Evaluations with an overall rating of “Demonstrates Exceptional Performance” may earn a 9% increase, not to exceed the Exceptional Performance maximum of the salary range for the classification.";
             break;
         default:
             message = "";
@@ -89,7 +89,7 @@ function displayMeritMessage() {
 function calculateMeritIncrease() {
     const currentRate = parseFloat(document.getElementById('current-rate').value);
     const meritRating = parseInt(document.getElementById('merit-rating').value);
-    const colaIncrease = currentRate * 0.02; // Assuming a 2% COLA increase
+    const colaIncrease = currentRate * 0.0425; // 4.25% COLA increase
     const meritPercentage = meritRating / 100;
     const meritIncrease = currentRate * meritPercentage;
     const estimatedRate = currentRate + colaIncrease + meritIncrease;
