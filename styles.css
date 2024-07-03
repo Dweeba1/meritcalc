@@ -3,7 +3,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh; /* Ensure full viewport height */
+    height: 85vh; /* Ensure full viewport height */
     background-color: #f4f4f4;
     margin: 0;
 }
@@ -135,7 +135,7 @@ th.grey-header {
     font-weight: bold;
 }
 
-.results-content p:nth-child(3) span {
+.results-content p:nth-child(4) span {
     font-size: 18pt;
 }
 
