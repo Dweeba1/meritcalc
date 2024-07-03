@@ -94,9 +94,9 @@ function calculateMeritIncrease() {
     const meritIncrease = currentRate * meritPercentage;
     const estimatedRate = currentRate + colaIncrease + meritIncrease;
 
-    document.getElementById('cola-increase').innerText = `$${(currentRate + colaIncrease).toFixed(2)}`;
-    document.getElementById('merit-increase').innerText = `${meritRating}%`;
-    document.getElementById('estimated-rate').innerText = `$${estimatedRate.toFixed(2)}`;
+    document.getElementById('cola-increase').innerText = currentRate ? `$${(currentRate + colaIncrease).toFixed(2)}` : "---";
+    document.getElementById('merit-increase').innerText = currentRate ? `${meritRating}%` : "---";
+    document.getElementById('estimated-rate').innerText = currentRate ? `$${estimatedRate.toFixed(2)}` : "---";
 }
 
 function clearForm() {
@@ -105,7 +105,7 @@ function clearForm() {
     document.getElementById('merit-rating').value = "";
     document.getElementById('merit-message').innerHTML = "";
     document.getElementById('salary-table').getElementsByTagName('tbody')[0].innerHTML = "";
-    document.getElementById('cola-increase').innerText = "";
-    document.getElementById('merit-increase').innerText = "";
-    document.getElementById('estimated-rate').innerText = "";
+    document.getElementById('cola-increase').innerText = "---";
+    document.getElementById('merit-increase').innerText = "---";
+    document.getElementById('estimated-rate').innerText = "---";
 }
