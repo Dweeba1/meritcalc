@@ -105,18 +105,20 @@ th[colspan="2"].exceptional-performance {
     white-space: normal;
 }
 
+th.grey-header {
+    background-color: #f0f0f0;
+}
+
 #results {
     background-color: orange;
     color: white;
-    padding: 20px;
+    padding: 20px 30px; /* Added left and right padding */
     border-radius: 10px;
     text-align: left;
     margin-top: 20px;
 }
 
 .results-content {
-    padding-left: 10px;
-    padding-right: 10px;
     font-size: 12pt;
 }
 
@@ -152,4 +154,8 @@ th[colspan="2"].exceptional-performance {
 .logo-footer-wrapper {
     text-align: center;
     margin-top: 10px;
+}
+
+.logo-footer {
+    width: 25%; /* 1/4 of the original size */
 }
