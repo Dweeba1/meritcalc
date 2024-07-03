@@ -3,7 +3,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 25vh;
+    height: 100vh;
     background-color: #f4f4f4;
     margin: 0;
 }
@@ -152,4 +152,5 @@ th[colspan="2"].exceptional-performance {
 .logo-footer-wrapper {
     text-align: center;
     margin-top: 10px;
+    height: 50px;
 }
