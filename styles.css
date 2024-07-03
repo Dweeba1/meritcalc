@@ -13,7 +13,7 @@ body {
     padding: 20px;
     background-color: white;
     border-radius: 10px;
-    width: 650px; /* Adjusted width */
+    width: 700px; /* Adjusted width */
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
     display: flex;
     flex-direction: column;
@@ -21,15 +21,16 @@ body {
 }
 
 .header, .footer {
-    background-color: orange;
+    background-color: white;
     padding: 10px;
     text-align: center;
     margin-bottom: 20px;
     border-radius: 10px 10px 0 0;
+    display: flex;
+    align-items: center;
 }
 
 .logo-wrapper {
-    background-color: orange;
     padding: 10px;
     margin-bottom: 10px;
 }
@@ -37,6 +38,7 @@ body {
 .header img {
     width: 200px; /* Adjusted size */
     height: 200px; /* Adjusted size */
+    background-color: orange;
 }
 
 .footer img {
@@ -53,7 +55,9 @@ body {
 h1 {
     font-size: 1.5em;
     margin: 0;
-    color: white;
+    color: black;
+    flex-grow: 1;
+    text-align: left;
 }
 
 .form-group {
@@ -115,12 +119,26 @@ th[colspan="2"].exceptional-performance {
 }
 
 #results {
+    background-color: orange;
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
     margin-top: 20px;
 }
 
-#results b {
+.results-content p {
+    margin: 10px 0;
+}
+
+.results-content p span {
     display: block;
-    margin-bottom: 10px;
+    margin-top: 5px;
+    font-weight: bold;
+}
+
+.results-content p:nth-child(3) span {
+    font-size: 18pt;
 }
 
 .merit-message {
