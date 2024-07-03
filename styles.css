@@ -3,9 +3,11 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 85vh; /* Ensure full viewport height */
+    height: 90vh; /* Full viewport height */
     background-color: #f4f4f4;
-    margin: 0;
+    margin: 10px;
+    padding: 0 10px; /* Ensure some padding for smaller screens */
+    box-sizing: border-box; /* Include padding and border in element's total width and height */
 }
 
 .calculator {
@@ -13,9 +15,10 @@ body {
     padding: 20px;
     background-color: white;
     border-radius: 10px;
-    max-width: 30%; /* Ensure it fits within viewport */
-    max-height: 100%; /* Ensure it fits within viewport */
-    overflow: hidden; /* Hide overflow content */
+    width: 100%;
+    max-width: 50v%; /* Ensure it fits within viewport */
+    max-height: 100vh; /* Ensure it fits within viewport height */
+    overflow: auto; /* Allow scrolling if necessary */
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
     display: flex;
     flex-direction: column;
@@ -23,16 +26,17 @@ body {
 }
 
 .header {
-    padding: 10px;
-    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     margin-bottom: 20px;
-    border-radius: 10px 10px 0 0;
 }
 
 .header img {
     width: auto;
     height: 100px; /* Adjust size as needed */
     background-color: orange;
+    object-fit: contain; /* Ensure it fits within the given size */
 }
 
 h1 {
@@ -42,18 +46,22 @@ h1 {
 }
 
 .form-group {
-    margin: 10px 0; /* Reduced margin */
+    margin: 5px 0; /* Reduced margin */
+    width: 100%; /* Ensure form groups take full width */
 }
 
 .form-group.buttons {
     display: flex;
-    justify-content: center; /* Align buttons to the right */
+    justify-content: center; /* Center buttons */
+    margin-top: 10px; /* Adjust to align with other elements */
 }
 
 .form-group.buttons button {
     font-size: 16px;
     padding: 10px 20px;
     margin: 5px;
+    flex: 1; /* Allow buttons to grow and shrink */
+    max-width: 150px; /* Limit max width */
 }
 
 label {
@@ -77,7 +85,7 @@ table {
 
 th, td {
     border: 1px solid #ccc;
-    padding: 10px;
+    padding: 5px; /* Adjust padding for smaller size */
     text-align: center;
     font-size: 10pt;
     font-weight: normal;
@@ -114,10 +122,10 @@ th.grey-header {
 #results {
     background-color: orange;
     color: white;
-    padding: 20px;
+    padding: 10px; /* Adjust padding */
     border-radius: 10px;
     text-align: left;
-    margin-top: 20px;
+    margin-top: 10px; /* Adjust margin */
 }
 
 .results-content {
@@ -125,7 +133,7 @@ th.grey-header {
 }
 
 .results-content p {
-    margin: 10px 0;
+    margin: 5px 0; /* Adjust margin */
 }
 
 .results-content p span {
@@ -159,5 +167,6 @@ th.grey-header {
 }
 
 .logo-footer {
-    width: 100px; /* Adjust size as needed */
+    width: 50px; /* Adjust size as needed */
+    height: auto;
 }
