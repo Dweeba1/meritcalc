@@ -15,8 +15,7 @@ body {
     padding: 20px;
     background-color: white;
     border-radius: 10px;
-    width: 100%;
-    max-width: 50v%; /* Ensure it fits within viewport */
+    max-width: 50%; /* Ensure it fits within viewport */
     max-height: 100vh; /* Ensure it fits within viewport height */
     overflow: auto; /* Allow scrolling if necessary */
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
