@@ -14,66 +14,73 @@
         </div>
         <div class="form-group">
             <label for="title">Select Title</label>
-            <select id="title" onchange="generateTable()">
+            <select id="title">
                 <option value="">Select One</option>
-                <!-- Options will be populated dynamically -->
             </select>
         </div>
         <div class="form-group">
-            <label for="current-rate">Current Hourly Rate</label>
-            <input type="number" id="current-rate" placeholder="$0.00">
+            <label for="currentHourlyRate">Current Hourly Rate</label>
+            <input type="text" id="currentHourlyRate" placeholder="$xx.xx">
         </div>
         <div class="form-group">
-            <label for="merit-rating">Merit Rating</label>
-            <select id="merit-rating" onchange="displayMeritMessage()">
+            <label for="meritRating">Merit Rating</label>
+            <select id="meritRating">
                 <option value="">Select One</option>
-                <option value="0">Needs Improvement</option>
-                <option value="3">Meets Performance Objectives</option>
-                <option value="6">Exceeds Performance Objectives</option>
-                <option value="9">Demonstrates Exceptional Performance</option>
+                <option value="Needs Improvement">Needs Improvement</option>
+                <option value="Meets Performance Objectives">Meets Performance Objectives</option>
+                <option value="Exceeds Performance Objectives">Exceeds Performance Objectives</option>
+                <option value="Demonstrates Exceptional Performance">Demonstrates Exceptional Performance</option>
             </select>
         </div>
-        <div id="merit-message" class="merit-message"></div>
         <div class="form-group buttons">
-            <button onclick="calculateMeritIncrease()">Calculate</button>
+            <button onclick="calculate()">Calculate</button>
             <button onclick="clearForm()">Clear Form</button>
         </div>
-        <table id="salary-table">
+        <table>
             <thead>
                 <tr>
-                    <th colspan="4"></th>
-                    <th colspan="2" class="exceptional-performance">Reserved for Exceptional<br>Performance</th>
-                </tr>
-                <tr>
-                    <th>Salary<br>Schedule</th>
+                    <th>Salary Schedule</th>
                     <th>Min</th>
                     <th>Mid</th>
-                    <th>Advertised<br>Max</th>
+                    <th>Advertised Max</th>
+                    <th colspan="2" class="exceptional-performance">Reserved for Exceptional Performance</th>
+                </tr>
+                <tr>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
                     <th class="grey-header">Bottom</th>
                     <th class="grey-header">Top</th>
                 </tr>
             </thead>
-            <tbody>
-                <!-- Table rows will be populated dynamically -->
+            <tbody id="salaryTable">
+                <tr>
+                    <td id="schedule"></td>
+                    <td id="min"></td>
+                    <td id="mid"></td>
+                    <td id="max"></td>
+                    <td id="bottom"></td>
+                    <td id="top"></td>
+                </tr>
             </tbody>
         </table>
-        <div id="results" class="results">
+        <div id="results">
+            <p><strong>Updated Salary Information:</strong></p>
             <div class="results-content">
-                <b>Updated Salary Information</b>
-                <p>Hourly Rate after Negotiated Increase is Applied<br><span id="cola-increase"><b>---</b></span></p>
-                <p>Merit Percentage Increase<br><span id="merit-increase"><b>---</b></span></p>
-                <p>Estimated Hourly Rate (effective 6/28/24)<br><span id="estimated-rate"><b>---</b></span></p>
+                <p>Hourly Rate after Negotiated Increase is Applied: <span id="newRate">---</span></p>
+                <p>Merit Percentage Increase: <span id="meritIncrease">---</span></p>
+                <p>Estimated Hourly Rate (effective 6/28/24): <span id="estimatedRate">---</span></p>
             </div>
         </div>
-        <div class="footer">
-            <div class="disclaimer">
-                <b>Disclaimer:</b> These calculations are not official and should be used as estimates only. You will receive a memo from Human Resources Services with your approved new hourly rate following completion of your evaluation.
-            </div>
-            <div class="logo-footer-wrapper">
-                <img src="logo2.png" alt="Logo" class="logo-footer">
-            </div>
+        <div class="merit-message" id="meritMessage"></div>
+        <div class="disclaimer">
+            <p><strong>Disclaimer:</strong> These calculations are not official and should be used as estimates only. You will receive a memo from Human Resources Services with your approved new hourly rate following completion of your evaluation.</p>
+        </div>
+        <div class="logo-footer-wrapper">
+            <img src="logo2.png" alt="Footer Logo" class="logo-footer">
         </div>
     </div>
-    <script src="script.js"></script>
+    <script src="scripts.js"></script>
 </body>
 </html>
