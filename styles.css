@@ -3,9 +3,9 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 90vh; /* Full viewport height */
+    height: 90%%
     background-color: #f4f4f4;
-    margin: 10px;
+    margin: 2px;
     padding: 0 10px; /* Ensure some padding for smaller screens */
     box-sizing: border-box; /* Include padding and border in element's total width and height */
 }
@@ -15,8 +15,7 @@ body {
     padding: 20px;
     background-color: white;
     border-radius: 10px;
-    max-width: 50%; /* Ensure it fits within viewport */
-    max-height: 90vh; /* Ensure it fits within viewport height */
+    max-width: 30%; /* Ensure it fits within viewport */
     overflow: auto; /* Allow scrolling if necessary */
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
     display: flex;
