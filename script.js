@@ -20,13 +20,6 @@ document.addEventListener('DOMContentLoaded', function() {
         const meritRating = this.value;
         updateMeritMessage(meritRating);
     });
-
-    // Modal close button functionality
-    document.querySelectorAll('.close-button').forEach(button => {
-        button.addEventListener('click', function() {
-            document.getElementById('meritMessageModal').style.display = 'none';
-        });
-    });
 });
 
 function parseCSV(data) {
@@ -100,8 +93,40 @@ function updateMeritMessage(meritRating) {
     }
 
     if (message) {
-        document.getElementById('meritMessageContent').textContent = message;
-        document.getElementById('meritMessageModal').style.display = 'block';
+        const popupWindow = window.open('', '_blank', 'width=400,height=300');
+        popupWindow.document.write(`
+            <html>
+            <head>
+                <title>Merit Message</title>
+                <style>
+                    body {
+                        font-family: Arial, sans-serif;
+                        background-color: #f4f4f4;
+                        text-align: center;
+                        padding: 20px;
+                    }
+                    .message {
+                        background-color: #fff;
+                        padding: 20px;
+                        border: 2px solid #ccc;
+                        border-radius: 5px;
+                        max-width: 90%;
+                        margin: 0 auto;
+                    }
+                    h2 {
+                        color: #333;
+                    }
+                </style>
+            </head>
+            <body>
+                <div class="message">
+                    <h2>Merit Message</h2>
+                    <p>${message}</p>
+                    <button onclick="window.close()">Close</button>
+                </div>
+            </body>
+            </html>
+        `);
     }
 }
 
@@ -170,6 +195,4 @@ function clearForm() {
     document.getElementById('estimatedRate').textContent = '---';
     document.getElementById('actualPercentage').textContent = '---';
     document.getElementById('meritMessage').textContent = '';
-    // Hide the modal on form clear
-    document.getElementById('meritMessageModal').style.display = 'none';
 }
