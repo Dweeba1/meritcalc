@@ -20,6 +20,8 @@ document.addEventListener('DOMContentLoaded', function() {
         const meritRating = this.value;
         updateMeritMessage(meritRating);
     });
+
+    document.getElementById('calculateButton').addEventListener('click', calculate);
 });
 
 function parseCSV(data) {
@@ -62,72 +64,61 @@ function populateTitles(titles) {
 
 function updateMeritMessage(meritRating) {
     let message = '';
-
-    const currentRate = parseFloat(document.getElementById('currentHourlyRate').value.replace('$', ''));
-    const newRate = currentRate * 1.0425; // COLA is 4.25%
-    const maxRate = parseFloat(document.getElementById('max').textContent);
-    const topRate = parseFloat(document.getElementById('top').textContent);
-    const estimatedRate = parseFloat(document.getElementById('estimatedRate').textContent);
-
     switch (meritRating) {
         case 'Needs Improvement':
             message = 'Evaluations with an overall rating of “Needs Improvement” are not eligible for performance-based merit increase.';
             break;
         case 'Meets Performance Objectives':
+            message = 'Evaluations with an overall rating of “Meets Performance Objectives” will earn a 3% increase, not to exceed the advertised maximum of the salary range for the classification.';
+            break;
         case 'Exceeds Performance Objectives':
-            if (newRate >= maxRate) {
-                message = 'Your hourly rate after COLA has exceeded the Advertised Max of your salary range; therefore, without a rating of “Demonstrating Exceptional Performance,” you are not eligible to receive an OPC merit increase.';
-            } else if (estimatedRate > maxRate) {
-                message = 'Your hourly rate and merit cannot exceed the Advertised Max of your salary range.';
-            }
+            message = 'Evaluations with an overall rating of “Exceeds Performance Objectives” will earn a 6% increase, not to exceed the advertised maximum of the salary range for the classification.';
             break;
         case 'Demonstrates Exceptional Performance':
-            if (newRate >= topRate) {
-                message = 'Your hourly rate after COLA has exceeded the top of the Exceptional Performance range of your salary range; therefore, you are not eligible to receive an OPC merit increase.';
-            } else if (estimatedRate > topRate) {
-                message = 'Your hourly rate and merit cannot exceed the top of the Exceptional Performance area of your salary range.';
-            }
+            message = 'Evaluations with an overall rating of “Demonstrates Exceptional Performance” will earn a 9% increase, not to exceed the Exceptional Performance maximum of the salary range for the classification.';
             break;
         default:
             message = '';
     }
 
-    if (message) {
-        const popupWindow = window.open('', '_blank', 'width=400,height=300');
-        popupWindow.document.write(`
-            <html>
-            <head>
-                <title>Merit Message</title>
-                <style>
-                    body {
-                        font-family: Arial, sans-serif;
-                        background-color: #f4f4f4;
-                        text-align: center;
-                        padding: 20px;
-                    }
-                    .message {
-                        background-color: #fff;
-                        padding: 20px;
-                        border: 2px solid #ccc;
-                        border-radius: 5px;
-                        max-width: 90%;
-                        margin: 0 auto;
-                    }
-                    h2 {
-                        color: #333;
-                    }
-                </style>
-            </head>
-            <body>
-                <div class="message">
-                    <h2>Merit Message</h2>
-                    <p>${message}</p>
-                    <button onclick="window.close()">Close</button>
-                </div>
-            </body>
-            </html>
-        `);
-    }
+    document.getElementById('meritMessage').textContent = message;
+}
+
+function showConditionalMessage(message) {
+    const popupWindow = window.open('', '_blank', 'width=400,height=300');
+    popupWindow.document.write(`
+        <html>
+        <head>
+            <title>Conditional Message</title>
+            <style>
+                body {
+                    font-family: Arial, sans-serif;
+                    background-color: #f4f4f4;
+                    text-align: center;
+                    padding: 20px;
+                }
+                .message {
+                    background-color: #fff;
+                    padding: 20px;
+                    border: 2px solid #ccc;
+                    border-radius: 5px;
+                    max-width: 90%;
+                    margin: 0 auto;
+                }
+                h2 {
+                    color: #333;
+                }
+            </style>
+        </head>
+        <body>
+            <div class="message">
+                <h2>Conditional Message</h2>
+                <p>${message}</p>
+                <button onclick="window.close()">Close</button>
+            </div>
+        </body>
+        </html>
+    `);
 }
 
 function calculate() {
@@ -174,8 +165,23 @@ function calculate() {
     document.getElementById('estimatedRate').textContent = estimatedRate.toFixed(2);
     document.getElementById('actualPercentage').textContent = `${actualPercentageIncrease.toFixed(2)}%`;
 
-    // Remove the merit percentage increase update as per previous request
-    // document.getElementById('meritIncrease').textContent = `${meritPercentage}%`;
+    // Show the conditional message
+    let conditionalMessage = '';
+    if (meritRating === 'Needs Improvement') {
+        conditionalMessage = 'Evaluations with an overall rating of “Needs Improvement” are not eligible for performance-based merit increase.';
+    } else if ((meritRating === 'Meets Performance Objectives' || meritRating === 'Exceeds Performance Objectives') && newRate >= maxRate) {
+        conditionalMessage = 'Your hourly rate after COLA has exceeded the Advertised Max of your salary range; therefore, without a rating of “Demonstrating Exceptional Performance,” you are not eligible to receive an OPC merit increase.';
+    } else if ((meritRating === 'Meets Performance Objectives' || meritRating === 'Exceeds Performance Objectives') && newRate < maxRate && estimatedRate >= maxRate) {
+        conditionalMessage = 'Your hourly rate and merit cannot exceed the Advertised Max of your salary range.';
+    } else if (meritRating === 'Demonstrates Exceptional Performance' && newRate >= topRate) {
+        conditionalMessage = 'Your hourly rate after COLA has exceeded the top of the Exceptional Performance range of your salary range; therefore, you are not eligible to receive an OPC merit increase.';
+    } else if (meritRating === 'Demonstrates Exceptional Performance' && newRate < topRate && estimatedRate = topRate) {
+        conditionalMessage = 'Your hourly rate and merit cannot exceed the top of the Exceptional Performance area of your salary range.';
+    }
+
+    if (conditionalMessage) {
+        showConditionalMessage(conditionalMessage);
+    }
 
     // Update the merit message based on the new rate and estimated rate
     updateMeritMessage(meritRating);
