@@ -5,6 +5,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Salary Calculation</title>
     <script src="script.js" defer></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        label {
+            display: block;
+            margin-top: 10px;
+        }
+        select, input {
+            display: block;
+            margin-top: 5px;
+        }
+        button {
+            margin-top: 10px;
+        }
+        #meritMessage {
+            margin-top: 10px;
+            padding: 10px;
+            background-color: #f4f4f4;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        #results p {
+            margin: 5px 0;
+        }
+    </style>
 </head>
 <body>
     <div>
@@ -26,18 +53,18 @@
         </select>
     </div>
     <div>
-        <p id="schedule"></p>
-        <p id="min"></p>
-        <p id="mid"></p>
-        <p id="max"></p>
-        <p id="bottom"></p>
-        <p id="top"></p>
+        <p>Schedule: <span id="schedule"></span></p>
+        <p>Min: <span id="min"></span></p>
+        <p>Mid: <span id="mid"></span></p>
+        <p>Max: <span id="max"></span></p>
+        <p>Bottom: <span id="bottom"></span></p>
+        <p>Top: <span id="top"></span></p>
     </div>
     <div>
         <button id="calculateButton">Calculate</button>
         <button onclick="clearForm()">Clear</button>
     </div>
-    <div>
+    <div id="results">
         <p>New Rate: <span id="newRate">---</span></p>
         <p>Estimated Rate: <span id="estimatedRate">---</span></p>
         <p>Actual Percentage Increase: <span id="actualPercentage">---</span></p>
