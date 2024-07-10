@@ -1,10 +1,32 @@
 document.addEventListener('DOMContentLoaded', function() {
     fetch('data.csv')
-        .then(response => response.text())
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.text();
+        })
         .then(data => {
+            console.log('CSV Data:', data); // Debugging: Log the fetched CSV data
             const titles = parseCSV(data);
+            console.log('Parsed Titles:', titles); // Debugging: Log the parsed titles
             populateTitles(titles);
+        })
+        .catch(error => {
+            console.error('There has been a problem with your fetch operation:', error);
         });
+
+    document.getElementById('meritRating').addEventListener('change', function() {
+        const meritRating = this.value;
+        updateMeritMessage(meritRating);
+    });
+
+    // Modal close button functionality
+    document.querySelectorAll('.close-button').forEach(button => {
+        button.addEventListener('click', function() {
+            document.getElementById('meritMessageModal').style.display = 'none';
+        });
+    });
 });
 
 function parseCSV(data) {
@@ -14,7 +36,7 @@ function parseCSV(data) {
         const values = line.split(',');
         let title = {};
         headers.forEach((header, index) => {
-            title[header.trim()] = values[index].trim();
+            title[header.trim()] = values[index]?.trim();
         });
         return title;
     });
@@ -24,10 +46,12 @@ function parseCSV(data) {
 function populateTitles(titles) {
     const titleSelect = document.getElementById('title');
     titles.forEach(title => {
-        const option = document.createElement('option');
-        option.value = title.Title;
-        option.textContent = title.Title;
-        titleSelect.appendChild(option);
+        if (title.Title) { // Ensure there is a valid title to add
+            const option = document.createElement('option');
+            option.value = title.Title;
+            option.textContent = title.Title;
+            titleSelect.appendChild(option);
+        }
     });
 
     titleSelect.addEventListener('change', function() {
@@ -41,6 +65,44 @@ function populateTitles(titles) {
             document.getElementById('top').textContent = selectedTitle.Top;
         }
     });
+}
+
+function updateMeritMessage(meritRating) {
+    let message = '';
+
+    const currentRate = parseFloat(document.getElementById('currentHourlyRate').value.replace('$', ''));
+    const newRate = currentRate * 1.0425; // COLA is 4.25%
+    const maxRate = parseFloat(document.getElementById('max').textContent);
+    const topRate = parseFloat(document.getElementById('top').textContent);
+    const estimatedRate = parseFloat(document.getElementById('estimatedRate').textContent);
+
+    switch (meritRating) {
+        case 'Needs Improvement':
+            message = 'Evaluations with an overall rating of “Needs Improvement” are not eligible for performance-based merit increase.';
+            break;
+        case 'Meets Performance Objectives':
+        case 'Exceeds Performance Objectives':
+            if (newRate >= maxRate) {
+                message = 'Your hourly rate after COLA has exceeded the Advertised Max of your salary range; therefore, without a rating of “Demonstrating Exceptional Performance,” you are not eligible to receive an OPC merit increase.';
+            } else if (estimatedRate > maxRate) {
+                message = 'Your hourly rate and merit cannot exceed the Advertised Max of your salary range.';
+            }
+            break;
+        case 'Demonstrates Exceptional Performance':
+            if (newRate >= topRate) {
+                message = 'Your hourly rate after COLA has exceeded the top of the Exceptional Performance range of your salary range; therefore, you are not eligible to receive an OPC merit increase.';
+            } else if (estimatedRate > topRate) {
+                message = 'Your hourly rate and merit cannot exceed the top of the Exceptional Performance area of your salary range.';
+            }
+            break;
+        default:
+            message = '';
+    }
+
+    if (message) {
+        document.getElementById('meritMessageContent').textContent = message;
+        document.getElementById('meritMessageModal').style.display = 'block';
+    }
 }
 
 function calculate() {
@@ -68,22 +130,30 @@ function calculate() {
             meritPercentage = 0;
     }
 
+    let estimatedRate;
+
     if (meritRating === 'Needs Improvement') {
-        document.getElementById('meritMessage').textContent = 'Evaluations with an overall rating of “Needs Improvement” are not eligible for performance-based merit increase.';
-    } else if (meritRating === 'Meets Performance Objectives') {
-        newRate = Math.min(newRate * (1 + meritPercentage / 100), maxRate);
-        document.getElementById('meritMessage').textContent = 'Evaluations with an overall rating of “Meets Performance Objectives” may earn a 3% increase, not to exceed the advertised maximum of the salary range for the classification.';
-    } else if (meritRating === 'Exceeds Performance Objectives') {
-        newRate = Math.min(newRate * (1 + meritPercentage / 100), maxRate);
-        document.getElementById('meritMessage').textContent = 'Evaluations with an overall rating of “Exceeds Performance Objectives” may earn a 6% increase, not to exceed the advertised maximum of the salary range for the classification.';
+        estimatedRate = newRate;
+    } else if (meritRating === 'Meets Performance Objectives' || meritRating === 'Exceeds Performance Objectives') {
+        const meritRate = newRate * (1 + meritPercentage / 100);
+        estimatedRate = newRate > maxRate ? newRate : Math.min(meritRate, maxRate);
     } else if (meritRating === 'Demonstrates Exceptional Performance') {
-        newRate = Math.min(newRate * (1 + meritPercentage / 100), topRate);
-        document.getElementById('meritMessage').textContent = 'Evaluations with an overall rating of “Demonstrates Exceptional Performance” may earn a 9% increase, not to exceed the Exceptional Performance maximum of the salary range for the classification.';
+        const meritRate = newRate * (1 + meritPercentage / 100);
+        estimatedRate = newRate > topRate ? newRate : Math.min(meritRate, topRate);
     }
 
+    // Calculate actual percentage increase
+    const actualPercentageIncrease = ((estimatedRate - newRate) / newRate) * 100;
+
     document.getElementById('newRate').textContent = newRate.toFixed(2);
-    document.getElementById('meritIncrease').textContent = `${meritPercentage}%`;
-    document.getElementById('estimatedRate').textContent = (newRate + newRate * meritPercentage / 100).toFixed(2);
+    document.getElementById('estimatedRate').textContent = estimatedRate.toFixed(2);
+    document.getElementById('actualPercentage').textContent = `${actualPercentageIncrease.toFixed(2)}%`;
+
+    // Remove the merit percentage increase update as per previous request
+    // document.getElementById('meritIncrease').textContent = `${meritPercentage}%`;
+
+    // Update the merit message based on the new rate and estimated rate
+    updateMeritMessage(meritRating);
 }
 
 function clearForm() {
@@ -97,7 +167,9 @@ function clearForm() {
     document.getElementById('bottom').textContent = '';
     document.getElementById('top').textContent = '';
     document.getElementById('newRate').textContent = '---';
-    document.getElementById('meritIncrease').textContent = '---';
     document.getElementById('estimatedRate').textContent = '---';
+    document.getElementById('actualPercentage').textContent = '---';
     document.getElementById('meritMessage').textContent = '';
+    // Hide the modal on form clear
+    document.getElementById('meritMessageModal').style.display = 'none';
 }
