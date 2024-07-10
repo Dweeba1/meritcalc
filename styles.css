@@ -3,9 +3,9 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 90%%
+    height: 100vh; /* Full viewport height */
     background-color: #f4f4f4;
-    margin: 2px;
+    margin: 0;
     padding: 0 10px; /* Ensure some padding for smaller screens */
     box-sizing: border-box; /* Include padding and border in element's total width and height */
 }
@@ -15,7 +15,9 @@ body {
     padding: 20px;
     background-color: white;
     border-radius: 10px;
-    max-width: 30%; /* Ensure it fits within viewport */
+    width: 100%;
+    max-width: 600px; /* Ensure it fits within viewport */
+    max-height: 100vh; /* Ensure it fits within viewport height */
     overflow: auto; /* Allow scrolling if necessary */
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
     display: flex;
@@ -32,8 +34,7 @@ body {
 
 .header img {
     width: auto;
-    height: 100px; /* Adjust size as needed */
-    background-color: orange;
+    height: 50px; /* Adjust size as needed */
     object-fit: contain; /* Ensure it fits within the given size */
 }
 
@@ -78,6 +79,7 @@ input, select {
 table {
     width: 100%;
     margin-top: 10px;
+    table-layout: fixed;
     border-collapse: collapse;
 }
 
@@ -87,7 +89,8 @@ th, td {
     text-align: center;
     font-size: 10pt;
     font-weight: normal;
-    white-space: nowrap;
+    white-space: normal;
+    word-wrap: break-word;
 }
 
 thead th {
@@ -140,7 +143,7 @@ th.grey-header {
     font-weight: bold;
 }
 
-.results-content p:nth-child(4) span {
+.results-content p:nth-child(3) span {
     font-size: 18pt;
 }
 
@@ -167,4 +170,43 @@ th.grey-header {
 .logo-footer {
     width: 50px; /* Adjust size as needed */
     height: auto;
+}
+
+/* Modal styles */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4);
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 600px;
+    border-radius: 10px;
+    position: relative;
+}
+
+.close-button {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close-button:hover,
+.close-button:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
 }
