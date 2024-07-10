@@ -175,7 +175,7 @@ function calculate() {
         conditionalMessage = 'Your hourly rate and merit cannot exceed the Advertised Max of your salary range.';
     } else if (meritRating === 'Demonstrates Exceptional Performance' && newRate >= topRate) {
         conditionalMessage = 'Your hourly rate after COLA has exceeded the top of the Exceptional Performance range of your salary range; therefore, you are not eligible to receive an OPC merit increase.';
-    } else if (meritRating === 'Demonstrates Exceptional Performance' && newRate < topRate && estimatedRate = topRate) {
+    } else if (meritRating === 'Demonstrates Exceptional Performance' && newRate < topRate && estimatedRate >= topRate) {
         conditionalMessage = 'Your hourly rate and merit cannot exceed the top of the Exceptional Performance area of your salary range.';
     }
 
