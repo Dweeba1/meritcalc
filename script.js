@@ -170,11 +170,11 @@ function calculate() {
     if (meritRating === 'Needs Improvement') {
         conditionalMessage = 'Evaluations with an overall rating of “Needs Improvement” are not eligible for performance-based merit increase.';
     } else if ((meritRating === 'Meets Performance Objectives' || meritRating === 'Exceeds Performance Objectives') && newRate >= maxRate) {
-        conditionalMessage = 'Your hourly rate after COLA has exceeded the Advertised Max of your salary range; therefore, without a rating of “Demonstrating Exceptional Performance,” you are not eligible to receive an OPC merit increase.';
+        conditionalMessage = 'Your hourly rate already exceeds the Advertised Max of your salary range; therefore, without a rating of “Demonstrating Exceptional Performance,” you are not eligible to receive an OPC merit increase.';
     } else if ((meritRating === 'Meets Performance Objectives' || meritRating === 'Exceeds Performance Objectives') && newRate < maxRate && estimatedRate >= maxRate) {
         conditionalMessage = 'Your hourly rate and merit cannot exceed the Advertised Max of your salary range.';
     } else if (meritRating === 'Demonstrates Exceptional Performance' && newRate >= topRate) {
-        conditionalMessage = 'Your hourly rate after COLA has exceeded the top of the Exceptional Performance range of your salary range; therefore, you are not eligible to receive an OPC merit increase.';
+        conditionalMessage = 'Your hourly rate already exceeds the top of the Exceptional Performance range of your salary range; therefore, you are not eligible to receive an OPC merit increase.';
     } else if (meritRating === 'Demonstrates Exceptional Performance' && newRate < topRate && estimatedRate >= topRate) {
         conditionalMessage = 'Your hourly rate and merit cannot exceed the top of the Exceptional Performance area of your salary range.';
     }
