@@ -145,7 +145,8 @@ function calculate() {
             meritPercentage = 0;
     }
 
-    const estimatedRate = currentRate * (1 + meritPercentage / 100);
+    let estimatedRate = currentRate * (1 + meritPercentage / 100);
+    estimatedRate = Math.min(estimatedRate, maxRate);
     
     // Calculate actual percentage increase
     const actualPercentageIncrease = ((estimatedRate - currentRate) / currentRate) * 100;
