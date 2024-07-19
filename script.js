@@ -145,22 +145,11 @@ function calculate() {
             meritPercentage = 0;
     }
 
-    let estimatedRate;
-
-    if (meritRating === 'Needs Improvement') {
-        estimatedRate = currentRate;
-    } else if (meritRating === 'Meets Performance Objectives' || meritRating === 'Exceeds Performance Objectives') {
-        const meritRate = currentRate * (1 + meritPercentage / 100);
-        estimatedRate = currentRate > maxRate ? currentRate : Math.min(meritRate, maxRate);
-    } else if (meritRating === 'Demonstrates Exceptional Performance') {
-        const meritRate = currentRate * (1 + meritPercentage / 100);
-        estimatedRate = currentRate > topRate ? currentRate : Math.min(meritRate, topRate);
-    }
-
+    const estimatedRate = currentRate * (1 + meritPercentage / 100);
+    
     // Calculate actual percentage increase
     const actualPercentageIncrease = ((estimatedRate - currentRate) / currentRate) * 100;
 
-    document.getElementById('currentRate').textContent = currentRate.toFixed(2);
     document.getElementById('estimatedRate').textContent = estimatedRate.toFixed(2);
     document.getElementById('actualPercentage').textContent = `${actualPercentageIncrease.toFixed(2)}%`;
 
@@ -169,11 +158,11 @@ function calculate() {
     if (meritRating === 'Needs Improvement') {
         conditionalMessage = 'Evaluations with an overall rating of “Needs Improvement” are not eligible for performance-based merit increase.';
     } else if ((meritRating === 'Meets Performance Objectives' || meritRating === 'Exceeds Performance Objectives') && currentRate >= maxRate) {
-        conditionalMessage = 'Your hourly rate already exceeds the Advertised Max of your salary range; therefore, without a rating of “Demonstrating Exceptional Performance,” you are not eligible to receive an OPC merit increase.';
+        conditionalMessage = 'Your current hourly rate has exceeded the Advertised Max of your salary range; therefore, without a rating of “Demonstrating Exceptional Performance,” you are not eligible to receive an OPC merit increase.';
     } else if ((meritRating === 'Meets Performance Objectives' || meritRating === 'Exceeds Performance Objectives') && currentRate < maxRate && estimatedRate >= maxRate) {
         conditionalMessage = 'Your hourly rate and merit cannot exceed the Advertised Max of your salary range.';
     } else if (meritRating === 'Demonstrates Exceptional Performance' && currentRate >= topRate) {
-        conditionalMessage = 'Your hourly rate already exceeds the top of the Exceptional Performance range of your salary range; therefore, you are not eligible to receive an OPC merit increase.';
+        conditionalMessage = 'Your current hourly rate has exceeded the top of the Exceptional Performance range of your salary range; therefore, you are not eligible to receive an OPC merit increase.';
     } else if (meritRating === 'Demonstrates Exceptional Performance' && currentRate < topRate && estimatedRate >= topRate) {
         conditionalMessage = 'Your hourly rate and merit cannot exceed the top of the Exceptional Performance area of your salary range.';
     }
@@ -182,7 +171,7 @@ function calculate() {
         showConditionalMessage(conditionalMessage);
     }
 
-    // Update the merit message based on the new rate and estimated rate
+    // Update the merit message based on the merit rating
     updateMeritMessage(meritRating);
 }
 
@@ -196,7 +185,6 @@ function clearForm() {
     document.getElementById('max').textContent = '';
     document.getElementById('bottom').textContent = '';
     document.getElementById('top').textContent = '';
-    document.getElementById('currentRate').textContent = '---';
     document.getElementById('estimatedRate').textContent = '---';
     document.getElementById('actualPercentage').textContent = '---';
     document.getElementById('meritMessage').textContent = '';
