@@ -130,7 +130,6 @@ function calculate() {
     const topRate = parseFloat(document.getElementById('top').textContent);
 
     let meritPercentage = 0;
-    let newRate = currentRate * 1.0425; // COLA is 4.25%
 
     switch (meritRating) {
         case 'Meets Performance Objectives':
@@ -149,19 +148,19 @@ function calculate() {
     let estimatedRate;
 
     if (meritRating === 'Needs Improvement') {
-        estimatedRate = newRate;
+        estimatedRate = currentRate;
     } else if (meritRating === 'Meets Performance Objectives' || meritRating === 'Exceeds Performance Objectives') {
-        const meritRate = newRate * (1 + meritPercentage / 100);
-        estimatedRate = newRate > maxRate ? newRate : Math.min(meritRate, maxRate);
+        const meritRate = currentRate * (1 + meritPercentage / 100);
+        estimatedRate = currentRate > maxRate ? currentRate : Math.min(meritRate, maxRate);
     } else if (meritRating === 'Demonstrates Exceptional Performance') {
-        const meritRate = newRate * (1 + meritPercentage / 100);
-        estimatedRate = newRate > topRate ? newRate : Math.min(meritRate, topRate);
+        const meritRate = currentRate * (1 + meritPercentage / 100);
+        estimatedRate = currentRate > topRate ? currentRate : Math.min(meritRate, topRate);
     }
 
     // Calculate actual percentage increase
-    const actualPercentageIncrease = ((estimatedRate - newRate) / newRate) * 100;
+    const actualPercentageIncrease = ((estimatedRate - currentRate) / currentRate) * 100;
 
-    document.getElementById('newRate').textContent = newRate.toFixed(2);
+    document.getElementById('currentRate').textContent = currentRate.toFixed(2);
     document.getElementById('estimatedRate').textContent = estimatedRate.toFixed(2);
     document.getElementById('actualPercentage').textContent = `${actualPercentageIncrease.toFixed(2)}%`;
 
@@ -169,13 +168,13 @@ function calculate() {
     let conditionalMessage = '';
     if (meritRating === 'Needs Improvement') {
         conditionalMessage = 'Evaluations with an overall rating of “Needs Improvement” are not eligible for performance-based merit increase.';
-    } else if ((meritRating === 'Meets Performance Objectives' || meritRating === 'Exceeds Performance Objectives') && newRate >= maxRate) {
+    } else if ((meritRating === 'Meets Performance Objectives' || meritRating === 'Exceeds Performance Objectives') && currentRate >= maxRate) {
         conditionalMessage = 'Your hourly rate already exceeds the Advertised Max of your salary range; therefore, without a rating of “Demonstrating Exceptional Performance,” you are not eligible to receive an OPC merit increase.';
-    } else if ((meritRating === 'Meets Performance Objectives' || meritRating === 'Exceeds Performance Objectives') && newRate < maxRate && estimatedRate >= maxRate) {
+    } else if ((meritRating === 'Meets Performance Objectives' || meritRating === 'Exceeds Performance Objectives') && currentRate < maxRate && estimatedRate >= maxRate) {
         conditionalMessage = 'Your hourly rate and merit cannot exceed the Advertised Max of your salary range.';
-    } else if (meritRating === 'Demonstrates Exceptional Performance' && newRate >= topRate) {
+    } else if (meritRating === 'Demonstrates Exceptional Performance' && currentRate >= topRate) {
         conditionalMessage = 'Your hourly rate already exceeds the top of the Exceptional Performance range of your salary range; therefore, you are not eligible to receive an OPC merit increase.';
-    } else if (meritRating === 'Demonstrates Exceptional Performance' && newRate < topRate && estimatedRate >= topRate) {
+    } else if (meritRating === 'Demonstrates Exceptional Performance' && currentRate < topRate && estimatedRate >= topRate) {
         conditionalMessage = 'Your hourly rate and merit cannot exceed the top of the Exceptional Performance area of your salary range.';
     }
 
@@ -197,7 +196,7 @@ function clearForm() {
     document.getElementById('max').textContent = '';
     document.getElementById('bottom').textContent = '';
     document.getElementById('top').textContent = '';
-    document.getElementById('newRate').textContent = '---';
+    document.getElementById('currentRate').textContent = '---';
     document.getElementById('estimatedRate').textContent = '---';
     document.getElementById('actualPercentage').textContent = '---';
     document.getElementById('meritMessage').textContent = '';
